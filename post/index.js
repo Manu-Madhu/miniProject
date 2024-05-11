@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require('cors')
 const { randomBytes } = require('crypto')
 
 const app = express();
 app.use(bodyParser.json());
+app.use(cors())
 
 const posts = {}
 
@@ -14,7 +16,7 @@ app.get("/posts", (req, res) => {
 app.post('/posts', (req, res) => {
     const id = randomBytes(4).toString('hex');
     const { title } = req.body;
-
+    console.log(title)
     posts[id] = {
         id, title
     }
@@ -23,5 +25,5 @@ app.post('/posts', (req, res) => {
 });
 
 app.listen(4000, () => {
-    console.log("Listening on 400")
+    console.log("port 4000 is listening now")
 })
