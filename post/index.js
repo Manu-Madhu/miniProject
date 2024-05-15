@@ -21,6 +21,9 @@ app.post('/posts', async (req, res) => {
     posts[id] = {
         id, title
     }
+
+    console.log("i am cretaed")
+    res.status(201).send(posts[id])
     await axios.post('http://localhost:4005/events', {
         type: "postCreated",
         data: {
@@ -33,7 +36,8 @@ app.post('/posts', async (req, res) => {
         console.log(error)
     })
 
-    res.status(201).send(posts[id])
+    console.log("i am not here")
+
 });
 
 app.post('/events', (req, res) => {

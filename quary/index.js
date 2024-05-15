@@ -1,6 +1,6 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser')
+const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json())
@@ -16,6 +16,7 @@ app.get('/posts', (req, res) => {
 app.post('/events', (req, res) => {
 
     const { type, data } = req.body;
+    console.log(type)
 
     if (type === "postCreated") {
         const { id, title } = data;
@@ -33,6 +34,6 @@ app.post('/events', (req, res) => {
 
 })
 
-app.listen(4003, () => {
-    console.log('server port listening 4003')
+app.listen(4002, () => {
+    console.log('server port listening 4002')
 })
