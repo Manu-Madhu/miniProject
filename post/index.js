@@ -17,31 +17,29 @@ app.get("/posts", (req, res) => {
 app.post('/posts', async (req, res) => {
     const id = randomBytes(4).toString('hex');
     const { title } = req.body;
-    console.log(title)
+
     posts[id] = {
         id, title
     }
 
-    console.log("i am cretaed")
-    res.status(201).send(posts[id])
+
     await axios.post('http://localhost:4005/events', {
         type: "postCreated",
         data: {
             id,
             title
         }
-    }).then((res) => {
-        console.log(res)
-    }).catch((error) => {
-        console.log(error)
-    })
+    }).catch((err) => {
+        console.log(err.message);
+    });
 
-    console.log("i am not here")
 
+    res.status(201).send(posts[id])
 });
 
 app.post('/events', (req, res) => {
     console.log(req.body.type)
+    res.send({});
 })
 
 app.listen(4000, () => {
